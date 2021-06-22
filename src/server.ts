@@ -1,15 +1,14 @@
-import express, { request, response } from "express";
+import "reflect-metadata";
+import express from "express";
+import { router } from "./routes";
+import "./database";
 
-const port = 8001;
+const port = process.env.PORT || 8000;
 
 const app = express();
 
-app.get("/test", (request, response) => {
-    return response.send("🎁\n");
-});
+app.use(express.json());
 
-app.post("/test_post", (request, response) => {
-    return response.send("🎁\n");
-})
+app.use(router);
 
 app.listen(port, () => console.log(`Server runing in port ${port} 🟢`));
